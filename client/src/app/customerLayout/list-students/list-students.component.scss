@@ -1,0 +1,40 @@
+.scaduto {
+  background-color: crimson;
+  color: white;
+}
+
+.inScadenza {
+  background-color: orange;
+  color: black;
+}
+
+.green-button {
+  color: green;
+}
+
+.disabled-button {
+  color: gray;
+  /* Cambia il colore del pulsante disabilitato */
+  cursor: not-allowed;
+}
+
+.body-wrapper {
+ padding: 3rem;
+}
+
+.toolbar-container {
+  display: flex;
+  padding: 1rem 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rounded-button {
+  border-radius: 50px;
+  text-transform: none;
+  padding: 10px 20px;
+}
+
+.paginator-container {
+  margin-top: 2rem;
+}

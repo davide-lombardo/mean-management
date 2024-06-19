@@ -1,0 +1,67 @@
+<app-page-layout>
+    <ng-container page-title>
+        <h1 class="primary-title">Informazioni studente</h1>
+    </ng-container>
+    <ng-container page-subtitle>
+        <h2>
+            Qui puoi modificare le informazioni dello studente
+        </h2>
+    </ng-container>
+
+    <ng-container page-body>
+        <form class="form-container" [formGroup]="myForm" (ngSubmit)="onSaveStudent()" *ngIf="!isLoading">
+            <div class="input-element">
+                <mat-form-field appearance="outline">
+                    <mat-label>Nome</mat-label>
+                    <input matInput formControlName="name">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Cognome</mat-label>
+                    <input matInput formControlName="surname">
+                </mat-form-field>
+            </div>
+    
+            <div class="input-element">
+                <mat-form-field appearance="outline">
+                    <mat-label>Anno di nascita</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="birth">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Sesso </mat-label>
+                    <mat-select formControlName="gender">
+                        <mat-option value="male">Uomo</mat-option>
+                        <mat-option value="female">Donna</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+    
+            <div class="input-element">
+                <mat-form-field appearance="outline">
+                    <mat-label>Durata Abbonamento</mat-label>
+                    <mat-select formControlName="subscriptionDuration">
+                        <mat-option *ngFor="let opzioneAbb of subscriptions" [value]="opzioneAbb">
+                            {{opzioneAbb | subscriptionType}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Corso</mat-label>
+                    <mat-select formControlName="course">
+                        <mat-option *ngFor="let opzioneAbb of courses" [value]="opzioneAbb">
+                            {{opzioneAbb}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+    
+            <div class="actions-footer">
+                <button mat-button routerLink="/" color="warn">Indietro</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="myForm.invalid">Salva</button>
+            </div>
+        </form>
+        <mat-spinner *ngIf="isLoading" style="margin: 60px auto;"></mat-spinner>
+    </ng-container>
+</app-page-layout>

@@ -1,0 +1,37 @@
+<div class="container">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div class="card" *ngIf="!isLoading">
+        <img src="assets/school-logo.svg" class="logo-img">
+        <h1>{{title}}</h1>
+
+        <form (submit)="onLogin(loginForm)" #loginForm="ngForm" class="form">
+            <mat-form-field appearance="outline" *ngIf="!isLogin">
+                <mat-label>Name</mat-label>
+                <input matInput name="name" ngModel placeholder="Name" #name="ngModel" required>
+                <mat-error *ngIf="name.invalid">Inserisci un nome valido.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <input matInput name="email" ngModel type="email" placeholder="Email" #emailInput="ngModel" required
+                    email>
+                <mat-error *ngIf="emailInput.invalid">Inserisci una mail valida.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel"
+                    required>
+                <mat-error *ngIf="passwordInput.invalid">Inserisci una password valido.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="!isLogin">
+                <input type="password" name="passwordConfirm" ngModel matInput placeholder="Confirm Password"
+                    #passwordConfirm="ngModel" required>
+                <mat-error *ngIf="passwordConfirm.invalid">Please enter a valid password.</mat-error>
+                <mat-error *ngIf="passwordConfirm.hasError('passwordConfirm')">La password di conferma deve essere uguale.</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" class="button">
+                {{isLogin ? 'Accedi' : 'Iscriviti' }}
+            </button>
+            <button mat-button color="primary" type="button" class="button" (click)="isLogin = !isLogin">
+                {{isLogin ? 'Vuoi iscriverti?' :'Vuoi accedere?' }}
+            </button>
+        </form>
+    </div>
+</div>
