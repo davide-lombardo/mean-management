@@ -35,12 +35,12 @@ Per installare il gestionale esegui questi passaggi:
 4. Inserire un secret per criptare le password nella linea JWT_SECRET
 5. Inserire tempo di durata del jwt e del coockie nelle linee JWT_EXPIRES_IN e JWT_COOKIE_EXPIRES_IN
 
-Dovreste avere un risultato simile nel vostro config.env (potete anche eliminare i campi riguardanti l'email):
+Dovreste avere un risultato simile nel vostro config.env:
 
 ```
 NODE_ENV=development
 PORT=3000
-DATABASE=mongodb+srv://mat:<password>@fitness.mssaad321kns.mongodb.net/fitness?retryWrites=true&w=majority
+DATABASE=mongodb+srv://mat:<password>@mean-management.mssaad321kns.mongodb.net/mean-management?retryWrites=true&w=majority
 USERNAME=mat
 DATABASE_PASSWORD=11321312213123123214
 
