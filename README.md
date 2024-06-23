@@ -2,7 +2,7 @@
 
 
 
-Questa è un'applicazione per la gestione di una scuola privata. Consente ai gestori agli amministratori di tenere traccia degli studenti, delle iscrizioni, delle lezioni e altro ancora.
+Questa è un'applicazione per la gestione di una scuola privata. Consente agli amministratori di tenere traccia degli studenti, delle iscrizioni, delle corsi e altro ancora.
 
 ## Tecnologie utilizzate
 <img src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png" width="50">  <img src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" width="50">
@@ -30,7 +30,7 @@ Per installare il gestionale esegui questi passaggi:
 > Prima dell'avvio dell'applicazione bisogna fare dei piccoli passaggi:
 
 1. Aprire il file config.env server/config.env
-2. Inserire l'indirizzo del proprio DB Mongo nella linea di DATABASE (Si consiglia di aggiungere queste informazioni per creare un database con un nome significativo `fitness?retryWrites=true&w=majority`)
+2. Inserire l'indirizzo del proprio DB Mongo nella linea di DATABASE (Si consiglia di aggiungere queste informazioni per creare un database con un nome significativo `node-management?retryWrites=true&w=majority`)
 3. Inserire la password dell'account con cui si accede al DB nella linea DATABASE_PASSWORD
 4. Inserire un secret per criptare le password nella linea JWT_SECRET
 5. Inserire tempo di durata del jwt e del coockie nelle linee JWT_EXPIRES_IN e JWT_COOKIE_EXPIRES_IN
