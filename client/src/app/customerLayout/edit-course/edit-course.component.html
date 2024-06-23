@@ -1,0 +1,60 @@
+<app-page-layout>
+    <ng-container page-title>
+        <h1 class="primary-title">Informazioni corso</h1>
+    </ng-container>
+    <ng-container page-subtitle>
+        <h2>
+            Qui puoi modificare le informazioni del corso
+        </h2>
+    </ng-container>
+
+    <ng-container page-body>
+        <section class="form-wrapper">
+            <form class="form-container" [formGroup]="myForm" (ngSubmit)="onSaveCourse()" *ngIf="!isLoading">
+                <div class="input-element">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nome</mat-label>
+                        <input matInput formControlName="title">
+                    </mat-form-field>
+                
+                    <mat-form-field appearance="outline">
+                        <mat-label>Capienza</mat-label>
+                        <input type="number" matInput formControlName="maxStudents">
+                    </mat-form-field>
+                </div>
+        
+                <div class="input-element">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Livello</mat-label>
+                        <mat-select formControlName="level">
+                            <mat-option *ngFor="let level of levels" [value]="level">
+                                {{level}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline">
+                        <mat-label>Categoria</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option *ngFor="let category of categories" [value]="category">
+                                {{category}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+    
+                <div class="input-element full-width">
+                    <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Descrizione</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
+        
+                <div class="actions-footer">
+                    <button mat-button routerLink="/list-courses" color="warn">Indietro</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="myForm.invalid">Salva</button>
+                </div>
+            </form>
+            <mat-spinner *ngIf="isLoading" style="margin: 60px auto;"></mat-spinner>
+        </section>
+    </ng-container>
+</app-page-layout>

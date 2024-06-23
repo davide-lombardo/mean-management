@@ -9,8 +9,9 @@ router.route('/')
     .get(authController.protect, courseController.getAllCourses)
     .post(authController.protect, courseController.createCourse)
 
-// router.route('/:id')
-//     .get(authController.protect, customerController.getCustomer)
-//     .patch(authController.protect, customerController.updateCustomer)
+router.route('/:id')
+    .get(authController.protect, courseController.getCourse)
+    .patch(authController.protect, courseController.updateCourse)
+    .delete(authController.protect, courseController.deleteCourse);
 
 module.exports = router;

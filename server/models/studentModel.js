@@ -44,18 +44,9 @@ const studentSchema = new mongoose.Schema({
         }
     },
     course: {
-        title: {
-            type: String,
-            required: true
-        },
-        level: {
-            type: String,
-            required: true
-        },
-        category: {
-            type: String,
-            required: true
-        }
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course',
+        required: [true, 'Student must be associated with a course']
     },
     subscription: {
         type: mongoose.Schema.Types.ObjectId,

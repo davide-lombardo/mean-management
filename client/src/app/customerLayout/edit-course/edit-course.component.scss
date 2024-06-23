@@ -1,0 +1,33 @@
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 520px;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.input-element {
+    display: flex;
+    gap: 20px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.container {
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}

@@ -6,7 +6,7 @@ import { tap } from 'rxjs';
 import { CustomSnackBarComponent } from 'src/app/shared/custom-snack-bar/custom-snack-bar.component';
 import { AddPaymentRequest } from 'src/app/shared/model/request/paymentRequest.model';
 import { CreateStudentRequest } from 'src/app/shared/model/request/studentRequest.model';
-import { Course, CoursesResponse } from 'src/app/shared/model/response/courseResponse.model';
+import { Course } from 'src/app/shared/model/response/courseResponse.model';
 import { StudentDetails } from 'src/app/shared/model/response/studentResponse.model';
 import { SubscriptionType } from 'src/app/shared/model/response/subscriptionResponse.model';
 import { CourseService } from 'src/app/shared/services/course.service';
@@ -28,8 +28,10 @@ export class EditStudentComponent implements OnInit {
   public weeklyLessons = new Set<number>();
   public courses = new Set<string>();
   public isEditMode: boolean = false;
-
   public isLoading: boolean = false;
+
+  public coursesPerPage: number = 5;
+  public currentPage: number = 0;
 
   constructor(
     private studentsService: StudentsService,
@@ -70,11 +72,10 @@ export class EditStudentComponent implements OnInit {
   }
 
   private getCourses(): void {
-    this.courseService.getCourses()
+    this.courseService.getCourses(this.currentPage, this.coursesPerPage)
       .pipe(
         tap(res => {
           this.coursesDetails = res.courses;
-          console.log(res.courses)
           this.populatedCourseInput();
         })
       ).subscribe()
@@ -162,7 +163,7 @@ export class EditStudentComponent implements OnInit {
 
   private createPaymentForStudent(studentId: string, subscriptionId: string, courseId: string): void {
     const paymentData: AddPaymentRequest = {
-        studentId: studentId,
+        student: studentId,
         paymentDate: new Date(),
         subscription: subscriptionId,
         course: courseId
@@ -173,6 +174,6 @@ export class EditStudentComponent implements OnInit {
             data: 'Pagamento aggiunto con successo',
         });
     });
-}
+  }
 
 }

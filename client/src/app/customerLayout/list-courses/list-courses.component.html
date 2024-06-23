@@ -1,0 +1,130 @@
+<app-page-layout>
+    <ng-container page-title>
+        <h1 class="primary-title">Corsi</h1>
+    </ng-container>
+    <ng-container page-subtitle>
+        <h2>
+            Qui puoi trovare la lista dei corsi, puoi aggiungere, modificare i dettagli o eliminarli
+        </h2>
+    </ng-container>
+
+    <ng-container page-body>
+        <div class="body-wrapper">
+            <!-- Action Toolbar -->
+            <section class="toolbar-container">
+                <mat-form-field>
+                    <input matInput type="text" (keyup)="filterList($any($event.target))" placeholder="Filtra risultati">
+                </mat-form-field>
+                <button mat-raised-button class="rounded-button" color="primary" matTooltip="Aggiungi corso" routerLink="/course-edit">
+                    <mat-icon>add</mat-icon>
+                    Aggiungi corso
+                </button>
+            </section>
+            <!-- Empty list -->
+            <ng-container *ngIf="!isLoading && (!dataSource?.data || dataSource.data.length === 0)">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>
+                            Ancora nessuno corso è stato aggiunto
+                        </mat-card-title>
+                    </mat-card-header>
+        
+                    <mat-card-content>
+                        Aggiungi dal bottone in alto a destra
+                    </mat-card-content>
+                </mat-card>
+            </ng-container>
+            <!-- Table -->
+            <div *ngIf="!isLoading && dataSource?.data && dataSource.data.length > 0">
+                <table mat-table [dataSource]="dataSource" class="custom-table mat-elevation-z8">
+        
+                    <ng-container matColumnDef="title">
+                        <th mat-header-cell *matHeaderCellDef> Nome </th>
+                        <td mat-cell *matCellDef="let course" [customerStatusColor]="course.statusSubscription">
+                            {{course.title}}
+                        </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="description">
+                        <th mat-header-cell *matHeaderCellDef> Descrizione </th>
+                        <td mat-cell *matCellDef="let course" [customerStatusColor]="course.statusSubscription">
+                            {{course.description}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="category">
+                        <th mat-header-cell *matHeaderCellDef> Categoria </th>
+                        <td mat-cell *matCellDef="let course" [customerStatusColor]="course.statusSubscription">
+                            {{course.category}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="level">
+                        <th mat-header-cell *matHeaderCellDef> Livello </th>
+                        <td mat-cell *matCellDef="let course" [customerStatusColor]="course.statusSubscription">
+                            {{course.level}}
+                        </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef> Stato </th>
+                        <td mat-cell *matCellDef="let course" [customerStatusColor]="course.statusSubscription">
+                            {{course.status}} </td>
+                    </ng-container>
+        
+                    <ng-container matColumnDef="maxStudents">
+                        <th mat-header-cell *matHeaderCellDef> Capienza </th>
+                        <td mat-cell *matCellDef="let course" [customerStatusColor]="course.statusSubscription">
+                            {{course.maxStudents}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="enrolledStudents">
+                        <th mat-header-cell *matHeaderCellDef> Iscritti </th>
+                        <td mat-cell *matCellDef="let course" [customerStatusColor]="course.statusSubscription">
+                            {{course.enrolledStudents.length > 0 ? course.enrolledStudents : '0'}} 
+                        </td>
+                            
+                    </ng-container>
+        
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let course" [customerStatusColor]="course.statusSubscription">
+                            <button 
+                                mat-icon-button 
+                                color="primary" 
+                                matTooltip="Modifica informazioni corso"
+                                [routerLink]="['/course-edit', course._id]">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            <!-- <button
+                                mat-icon-button 
+                                color="primary" 
+                                matTooltip="Rinnova abbonamento" 
+                                (click)="addPayment(course._id)"
+                                [disabled]="false">
+                                <mat-icon>paid</mat-icon>
+                            </button> -->
+                            <button 
+                                mat-icon-button 
+                                color="primary"
+                                matTooltip="Elimina corso"
+                                (click)="deleteCourse(course._id)"
+                                [disabled]="false">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+        
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <section class="paginator-container">
+                    <mat-paginator [length]="totalCourses" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons
+                        [pageSize]="coursesPerPage" [pageIndex]="currentPage" #paginator (page)="onChangedPage($event)">
+                    </mat-paginator>
+                </section>
+            </div>
+            <!-- Spinner -->
+            <mat-spinner *ngIf="isLoading" style="margin: 60px auto;"></mat-spinner>
+        </div>
+    </ng-container>
+</app-page-layout>

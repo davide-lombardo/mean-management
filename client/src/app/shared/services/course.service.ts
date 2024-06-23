@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { CoursesResponse } from '../model/response/courseResponse.model';
+import { Course, CoursesListResponse } from '../model/response/courseResponse.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,24 +12,58 @@ export class CourseService {
 
   constructor(private http: HttpClient) { };
 
-  getCourses(): Observable<CoursesResponse> {
-    const url = `${this.serverUrl}/courses`;
-    return this.http.get<CoursesResponse>(url);
+  private CourseCategory = {
+    Technology: 'Technology',
+    Languages: 'Languages',
+    Arts: 'Arts',
+    Business: 'Business',
+    Health: 'Health',
+    Science: 'Science',
+    Humanities: 'Humanities',
+    Programming: 'Programming',
+    Design: 'Design',
+    Marketing: 'Marketing'
   };
 
-  // getSubscriptionById(id: string): Observable<SubscriptionDetails> {
-  //   const url = `${this.serverUrl}/subscriptions/${id}`;
-  //   return this.http.get<SubscriptionDetails>(url);
-  // };
+  private CourseLevel = {
+    Beginner: 'Beginner',
+    Intermediate: 'Intermediate',
+    Advanced: 'Advanced'
+  };
 
-  // addSubscription(subscription: SubscriptionDetails): Observable<SubscriptionDetails> {
-  //   const url = `${this.serverUrl}/subscriptions`;
-  //   return this.http.post<SubscriptionDetails>(url, subscription);
-  // };
+  getLevels(): string[] {
+    return Object.values(this.CourseLevel);
+  }
 
-  // deleteSubscription(id: string): Observable<any> {
-  //   const url = `${this.serverUrl}/subscriptions/${id}`;
-  //   return this.http.delete(url);
-  // };
+  getCategories(): string[] {
+    return Object.values(this.CourseCategory);
+  }
+
+  getCourses(currentPage: number, coursesPerPage: number): Observable<CoursesListResponse> {
+    const queryParams = `?limit=${coursesPerPage}&page=${currentPage}`;
+    const url = `${this.serverUrl}/courses` + queryParams;
+    return this.http.get<{ status: string; courses: any[]; countCourses: number; }>(url);
+  };
+
+  getCourseById(id: string): Observable<Course> {
+    const url = `${this.serverUrl}/courses/${id}`;
+    return this.http.get<any>(url);
+  };
+
+  addCourse(course: any): Observable<Course> {
+    const url = `${this.serverUrl}/courses`;
+    return this.http.post<any>(url, course);
+  };
+
+  deleteCourse(id: string) {
+    const url = `${this.serverUrl}/courses/${id}`;
+    return this.http.delete(url);
+  };
+
+  patchCourse(course: any) {
+    const id = course._id;
+    const url = `${this.serverUrl}/courses/${id}`;
+    return this.http.patch(url, course);
+  };
 
 }

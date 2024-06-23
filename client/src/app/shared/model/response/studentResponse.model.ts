@@ -7,11 +7,24 @@ export interface StudentDetails {
     subscriptionDuration: number,
     weeklyLessons: number,
     subscriptionExpires: Date,
-    statusSubscription: 'scaduto' | 'in scadenza' | 'in corso',
+    statusSubscription: SubscriptionStatus,
     course: {
         _id: string,
         title: string,
         level: string,
         category: string
     }
+}
+
+export interface SubscriptionStatus {
+    Active: 'Active',
+    Inactive: 'Inactive',
+    Suspended: 'Suspended',
+    Expired: 'Expired'
+};
+
+export interface StudentListResponse {
+    message: string,
+    students: StudentDetails[],
+    countStudents: number,
 }

@@ -14,10 +14,10 @@ export class PaymentsService {
 
   constructor(private http: HttpClient) { };
 
-  getPayments(): Observable<PaymentResponse> {
+  getPayments(): Observable<any> {
     const url = `${this.serverUrl}/payments`;
     return this.http.get<PaymentResponse>(url);
-  };
+  }
 
   getPaymentById(id: string): Observable<PaymentDetails> {
     const url = `${this.serverUrl}/payments/${id}`;

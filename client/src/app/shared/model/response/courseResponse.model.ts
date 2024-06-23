@@ -1,4 +1,4 @@
-export interface CoursesResponse {
+export interface CoursesListResponse {
   countCourses: number;
   courses: Course[];
   status: string;

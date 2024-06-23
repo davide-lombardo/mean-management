@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SubscriptionDetails } from '../model/subscriptionDetails.model';
 import { environment } from 'src/environments/environment';
-import { StudentDetails } from '../model/response/studentResponse.model';
+import { StudentDetails, StudentListResponse } from '../model/response/studentResponse.model';
 import { CreateStudentRequest } from '../model/request/studentRequest.model';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class StudentsService {
 
   constructor(private http: HttpClient) { };
 
-  getStudents(currentPage: number, studentsPerPage: number) {
+  getStudents(currentPage: number, studentsPerPage: number): Observable<StudentListResponse> {
     const queryParams = `?limit=${studentsPerPage}&page=${currentPage}`;
     const url = `${this.serverUrl}/students` + queryParams;
     return this.http.get<{ message: string; students: StudentDetails[]; countStudents: number; }>(url);

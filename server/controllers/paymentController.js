@@ -6,15 +6,16 @@ const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
-exports.getAllPayments = catchAsync(async (req, res, next) => {
-    const features = new APIFeatures(Payment.find(), req.query).paginate();
-    features.query.populate({
-        path: 'student',
-        select: 'name surname'
-    });
-    
-    const payments = await features.query.exec();
 
+exports.getAllPayments = catchAsync(async (req, res, next) => {
+    const payments = await Payment.find()
+        .populate({
+            path: 'student',
+            select: 'name surname'
+        })
+        .populate('subscription', 'subscriptionDuration startDate endDate amount')
+        .populate('course', 'title');
+    
     res.status(200).json({
         status: 'success',
         results: payments.length,
@@ -33,7 +34,7 @@ exports.getPayment = catchAsync(async (req, res, next) => {
 });
 
 exports.addPayment = async (req, res, next) => {
-    const { studentId, subscription, course, paymentDate } = req.body; // Change to courseId
+    const { student, subscription, course, paymentDate } = req.body;
 
     try {
         // Validate subscription existence
@@ -48,16 +49,13 @@ exports.addPayment = async (req, res, next) => {
             return next(new AppError('No course found with the provided ID', 404));
         }
 
-        // Example: Creating a new Payment
         const newPayment = await Payment.create({
-            studentId: studentId,
+            student: student,
             paymentDate: paymentDate,
             subscription: subscription,
-            course: {
-                title: foundCourse.title // Assuming course title is a string
-            },
-            amount: foundSubscription.amount // Adjust as per your logic
-        });
+            course: course,
+            status: 'Pending'
+        });    
 
         res.status(201).json({
             status: 'success',
@@ -66,7 +64,7 @@ exports.addPayment = async (req, res, next) => {
             }
         });
     } catch (err) {
-        return next(new AppError(err.message, 500)); // Handle other errors
+        return next(new AppError(err.message, 500));
     }
 };
 

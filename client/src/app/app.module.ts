@@ -18,6 +18,8 @@ import { ListStudentsComponent } from './customerLayout/list-students/list-stude
 import { EditStudentComponent } from './customerLayout/edit-student/edit-student.component';
 import { PageLayoutComponent } from './customerLayout/page-layout/page-layout.component';
 import { SubscriptionStatusPipe } from './shared/pipes/subscription-status.pipe';
+import { ListCoursesComponent } from './customerLayout/list-courses/list-courses.component';
+import { EditCourseComponent } from './customerLayout/edit-course/edit-course.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { SubscriptionStatusPipe } from './shared/pipes/subscription-status.pipe'
     CustomerStatusDirective,
     ListPaymentComponent,
     ListStudentsComponent,
+    ListCoursesComponent,
     EditStudentComponent,
+    EditCourseComponent,
     LoginComponent,
     DialogComponent,
     CustomSnackBarComponent,

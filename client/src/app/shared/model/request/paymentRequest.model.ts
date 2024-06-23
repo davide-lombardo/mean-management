@@ -1,5 +1,5 @@
 export interface AddPaymentRequest {
-    studentId: string,
+    student: string,
     paymentDate: Date,
     subscription: string,
     course: string
