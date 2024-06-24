@@ -2,7 +2,7 @@
 
 
 
-Questa è un'applicazione per la gestione di una scuola privata. Consente agli amministratori di tenere traccia degli studenti, delle iscrizioni, delle corsi e altro ancora.
+Questa è un'applicazione per la gestione di una scuola privata. Consente agli amministratori di tenere traccia degli studenti, delle iscrizioni, dei corsi e altro ancora.
 
 ## Tecnologie utilizzate
 <img src="https://user-images.githubusercontent.com/25181517/192108372-f71d70ac-7ae6-4c0d-8395-51d8870c2ef0.png" width="50">  <img src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" width="50">
@@ -22,7 +22,7 @@ Per installare il gestionale esegui questi passaggi:
 
 1. Clona il repository
 2. Entra nelle directory di client e server
-3. Installa tutte le dipende con `npm install` (utilizzare una versione di node.js che va dalla 16 alla 18)
+3. Installa tutte le dipendenze con `npm install` (utilizzare una versione di node.js che va dalla 16 alla 18)
 
 ## Configurazioni
 
@@ -41,7 +41,7 @@ Dovreste avere un risultato simile nel vostro config.env:
 NODE_ENV=development
 PORT=3000
 DATABASE=mongodb+srv://mat:<password>@mean-management.mssaad321kns.mongodb.net/mean-management?retryWrites=true&w=majority
-USERNAME=mat
+USERNAME=myuser
 DATABASE_PASSWORD=11321312213123123214
 
 
@@ -55,11 +55,6 @@ JWT_COOKIE_EXPIRES_IN=90
 Per avviare l'applicazione ora ci basterà eseguire due diversi comandi nelle due diverse direcory:
 + Nella cartella client utilizziamo `npm run start:mock`
 + Nella cartella server utilizziamo `npm run start`
-
-## Documentazione extra
-
-Tramite il link qui sotto è possibile vedere tutti gli endpoint per le diverse operazioni 
-https://documenter.getpostman.com/view/22669479/2sA3QwcA8c
 
 ## Licenza
 
